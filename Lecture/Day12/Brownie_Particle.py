@@ -63,9 +63,23 @@ def BrownianParticles(N,R,L,TotalTime,dt,Skip):
             for j in range(N):
                 r[j,j] = 10
             
-            FiMag = np.e*( (sigma/r)**(14) - (sigma/r)**8 )
-            FiMag*Dx (x-component)
-            FiMag*Dy (y-component)
+            FiMag = (6*e/sigma**2)*(2* (sigma/r)**(14) – (sigma/r)**8 )
+            FiMag*Dx # (x-component)
+            FiMag*Dy # (y-component)
+    
+            Fi[0,:] = np.sum(FiMag*Dx,axis=1)
+            Fi[1,:] = np.sum(FiMag*Dy,axis=1)
 
-                    
+            
+            x[:,:,i] = x[:,:,i] + (dt/zeta)*(xi + Fi)
+            
+            # impose periodic boundary condition
+            Mask = x[0,:,i]>L
+            x[0,Mask,i] = x[0,Mask,i] - L
+            Mask = x[0,:,i]<0
+            x[0,Mask,i] = x[0,Mask,i] + L
+            Mask = x[1,:,i]>L
+            x[1,Mask,i] = x[1,Mask,i] - L
+            Mask = x[1,:,i]<0
+            x[1,Mask,i] = x[1,Mask,i] + L
             
