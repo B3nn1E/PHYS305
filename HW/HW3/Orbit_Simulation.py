@@ -140,18 +140,20 @@ def Four_Body_Sim():
             
             # Update the plot every steps taken
             if i % 100 == 0:
-                l1.set_data(pos_sun[i, 0], pos_sun[i, 1])
-                l2.set_data(pos_earth[i, 0], pos_earth[i, 1])
-                l3.set_data(pos_jup[i, 0], pos_jup[i, 1])
-                l4.set_data( pos_earth[i,0] + pos_moon[i, 0],  pos_earth[i,1] + pos_moon[i, 1])
-        
+                l1.set_data([pos_sun[i, 0]], [pos_sun[i, 1]])
+                l2.set_data([pos_earth[i, 0]], [pos_earth[i, 1]])
+                l3.set_data([pos_jup[i, 0]], [pos_jup[i, 1]])
+                l4.set_data([pos_earth[i, 0] + pos_moon[i, 0]], [pos_earth[i, 1] + pos_moon[i, 1]])
+                
                 trace1.set_data(pos_sun[:i, 0], pos_sun[:i, 1])
                 trace2.set_data(pos_earth[:i, 0], pos_earth[:i, 1])
                 trace3.set_data(pos_jup[:i, 0], pos_jup[:i, 1])
-                trace4.set_data(pos_earth[:i, 0]+pos_moon[:i, 1], pos_earth[:i,1] + pos_moon[:i, 1])
-        
+                trace4.set_data(pos_earth[:i, 0] + pos_moon[:i, 0], pos_earth[:i, 1] + pos_moon[:i, 1])
+                
                 writer.grab_frame()
-                plt.pause(0.01) 
+                plt.pause(0.01)
+
+
 
 # Run the simulation
 Four_Body_Sim()
